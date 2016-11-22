@@ -153,11 +153,10 @@ namespace WsTools
                 
                 for(sregex_iterator item = matchBegin; item != matchEnd; ++item)
                 {
-                    placeholder temp = {
-                        .paraIndex = (unsigned)atoi(item->str(1).c_str()),
-                        .str = item->str(0),
-                        .format = item->str(3)
-                    };
+                    placeholder temp;
+                    temp.paraIndex = (unsigned)atoi(item->str(1).c_str());
+                    temp.str = item->str(0);
+                    temp.format = item->str(3);
 
                     bool exist = false;
                     for(auto item : placeholders)
