@@ -56,12 +56,12 @@ namespace WsTools
         
         for(auto index = sourceData.find(','); index != string::npos; index = sourceData.find(','))
         {
-            sourceData.replace(sourceData.begin() + index, sourceData.begin() + index + 1, "");
+            sourceData.replace(sourceData.begin() + (int)index, sourceData.begin() + (int)index + 1, "");
         }
 
         if(sourceData.find('.') != string::npos)
         {
-            convertData = (int)roundf(atof(sourceData.c_str()));
+            convertData = (int)roundf((float)atof(sourceData.c_str()));
         }else
         {
             convertData = atoi(sourceData.c_str());
@@ -70,7 +70,7 @@ namespace WsTools
         stringstream tempSStr;
         tempSStr << convertData;
 
-        for(int i = tempSStr.str().length(); i < minCount; ++i){ strs << "0"; }
+        for(int i = (int)(tempSStr.str().length()); i < minCount; ++i){ strs << "0"; }
         strs << convertData;
 
         return true;
@@ -96,16 +96,16 @@ namespace WsTools
             return true;
         }
 
-        string unit = matchBegin->str(1).length() > 0 ? matchBegin->str(1) : "￥";
+       string unit = matchBegin->str(1).length() > 0 ? matchBegin->str(1) : "￥";
 
-        string sourceData = matchBegin->str(2);
+       string sourceData = matchBegin->str(2);
 
         for(auto index = sourceData.find(','); index != string::npos; index = sourceData.find(','))
         {
-            sourceData.replace(sourceData.begin() + index, sourceData.begin() + index + 1, "");
+            sourceData.replace(sourceData.begin() + (int)index, sourceData.begin() + (int)index + 1, "");
         }
 
-        float convertData = roundf(atof(sourceData.c_str()) * pow(10, decimalDigits)) / pow(10, decimalDigits);
+        float convertData = (float)(roundf((float)(atof(sourceData.c_str()) * pow(10, decimalDigits))) / pow(10, decimalDigits));
 
         stringstream tempSStr;
         tempSStr << convertData;
@@ -121,7 +121,7 @@ namespace WsTools
             dotIndex = tempStr.length() - 1;
         }
 
-        for(int i = tempStr.length() - dotIndex - 1; i < decimalDigits; ++i){ strs << "0"; }
+        for(int i = (int)tempStr.length() - (int)dotIndex - 1; i < decimalDigits; ++i){ strs << "0"; }
                     
         return true;
     }
@@ -153,7 +153,7 @@ namespace WsTools
 
         for(auto index = sourceData.find(','); index != string::npos; index = sourceData.find(','))
         {
-            sourceData.replace(sourceData.begin() + index, sourceData.begin() + index + 1, "");
+            sourceData.replace(sourceData.begin() + (int)index, sourceData.begin() + (int)index + 1, "");
         }
 
         double convertData = round(atof(sourceData.c_str()) * pow(10, decimalDigits)) / pow(10, decimalDigits);
@@ -172,7 +172,7 @@ namespace WsTools
             dotIndex = tempStr.length() - 1;
         }
 
-        for(int i = tempStr.length() - dotIndex - 1; i < decimalDigits; ++i){ strs << "0"; }
+        for(int i = (int)tempStr.length() - (int)dotIndex - 1; i < decimalDigits; ++i){ strs << "0"; }
         return true;
     }
 
@@ -187,7 +187,7 @@ namespace WsTools
 
         if(matchBegin->str(1).c_str() == string("-"))
         {
-            for(int i = getStringLength(source); i < minCount; ++i)
+            for(int i = (int)getStringLength(source); i < minCount; ++i)
             {
                 strs << " ";
             }
@@ -197,7 +197,7 @@ namespace WsTools
 
         if(matchBegin->str(1).c_str() != string("-"))
         {
-            for(int i = getStringLength(source); i < minCount; ++i)
+            for(int i = (int)getStringLength(source); i < minCount; ++i)
             {
                 strs << " ";
             }
@@ -276,7 +276,7 @@ namespace WsTools
             for(size_t i = 0; i < str.length();)
             {
                 int length = 0;
-                unsigned short temp = str.at(i) & 0x00FF;
+                unsigned short temp = (unsigned short)(str.at(i) & 0x00FF);
                 while((temp << length & 0x00FF) > 1 << 7)
                 {
                     length ++;
