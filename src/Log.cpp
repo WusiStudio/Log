@@ -261,7 +261,7 @@ namespace WsTools
         {
             random_device rd;
             uniform_int_distribution<int> dis(0x00, 0xFF);
-            sprintf(temp + 2 * i, "%02X", dis(rd));
+            sprintf_s(temp + 2 * i, 2, "%02X", dis(rd));
         }
         return temp;
     }
