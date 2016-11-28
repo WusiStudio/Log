@@ -1,37 +1,37 @@
-#include "Log.h"
+#include "WSLog.h"
 #include <random>
 
 namespace WsTools
 {
-    string Log::_levelName[]  = { "DEBUG", "INFO", "NOTICE", "WARN", "ERR", "CRIT", "ALERT", "EMERG" };
+    string WSLog::_levelName[]  = { "DEBUG", "INFO", "NOTICE", "WARN", "ERR", "CRIT", "ALERT", "EMERG" };
 
-    map<string, string> Log::escapes;
+    map<string, string> WSLog::escapes;
 
-    mutex Log::mtx;
+    mutex WSLog::mtx;
 
-    Log::Log(void)
+    WSLog::WSLog(void)
     {
         _filter = level::DEBUG;
     }
 
-    void Log::setFilterLevel(const level _level)
+    void WSLog::setFilterLevel(const level _level)
     {
         _filter = _level;
     }
 
-    void Log::printLog(const string & level, const string & log) const
+    void WSLog::printLog(const string & level, const string & log) const
     {
         cout << level << log << endl;
     }
 
-    void Log::_log(const level _level, const string & str) const
+    void WSLog::_log(const level _level, const string & str) const
     {
         if(_level < _filter) return;
         //输出打印信息
         _printLog(_level, str);
     }
 
-    bool Log::_format_D(stringstream & strs, const string & format, const string & source) const
+    bool WSLog::_format_D(stringstream & strs, const string & format, const string & source) const
     {
         static regex format_D("^[dD](\\d*)$");
         auto matchBegin = sregex_iterator(format.begin(), format.end(), format_D);
@@ -76,7 +76,7 @@ namespace WsTools
         return true;
     }
 
-    bool Log::_format_C(stringstream & strs, const string & format, const string & source) const
+    bool WSLog::_format_C(stringstream & strs, const string & format, const string & source) const
     {
         static regex format_D("^[cC](\\d*)$");
         auto matchBegin = sregex_iterator(format.begin(), format.end(), format_D);
@@ -126,7 +126,7 @@ namespace WsTools
         return true;
     }
 
-    bool Log::_format_F(stringstream & strs, const string & format, const string & source) const
+    bool WSLog::_format_F(stringstream & strs, const string & format, const string & source) const
     {
         static regex format_D("^[fF](\\d*)$");
         auto matchBegin = sregex_iterator(format.begin(), format.end(), format_D);
@@ -176,7 +176,7 @@ namespace WsTools
         return true;
     }
 
-    bool Log::_format_aline(stringstream & strs, const string & format, const string & source) const
+    bool WSLog::_format_aline(stringstream & strs, const string & format, const string & source) const
     {
         static regex format_D("^([-]?)(\\d*)$");
         auto matchBegin = sregex_iterator(format.begin(), format.end(), format_D);
@@ -207,7 +207,7 @@ namespace WsTools
     }
 
 
-    void Log::_printLog(const level _level, const string & log) const
+    void WSLog::_printLog(const level _level, const string & log) const
     {
         stringstream sstr;
         sstr << "[" << _levelName[_level] << "] ";
@@ -218,7 +218,7 @@ namespace WsTools
         lck.unlock();
     }
 
-    string Log::scientificToDefault(const string & source) const
+    string WSLog::scientificToDefault(const string & source) const
     {
         string result = source;
         //处理科学计数法
@@ -254,7 +254,7 @@ namespace WsTools
         return result;
     }
 
-    string Log::createUuid(void) const
+    string WSLog::createUuid(void) const
     {
         char temp[33] = {0};
         for(size_t i = 0; i < (sizeof(temp) - 1) / 2; ++i)
@@ -267,7 +267,7 @@ namespace WsTools
     }
 
     //返回字符串实际长度（单位是一个英文字符）
-    const unsigned Log::getStringLength(const string & str, const string & coding) const
+    const unsigned WSLog::getStringLength(const string & str, const string & coding) const
     {
         unsigned result = 0;
         if(coding == "utf-8")
@@ -293,4 +293,6 @@ namespace WsTools
         }
         return result;
     }
+
+    WSLog Log;
 }

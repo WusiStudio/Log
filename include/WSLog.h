@@ -18,7 +18,7 @@ using namespace std;
 
 namespace WsTools
 {
-    class Log
+    class WSLog
     {
     public:
 
@@ -85,7 +85,7 @@ namespace WsTools
 
         virtual void printLog(const string & level, const string & log) const;
 
-        Log(void);
+        WSLog(void);
         
     protected:
 
@@ -268,6 +268,8 @@ namespace WsTools
         const unsigned getStringLength(const string & str, const string & coding = "utf-8") const;
 
     };
+
+    extern WSLog Log;
 }
 
 #endif //__LOG_H__

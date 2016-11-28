@@ -1,10 +1,10 @@
-#include <Log.h>
+#include <WSLog.h>
 
 using namespace WsTools;
 
 int main(int argc, char ** argv)
 {
-    Log ws_log;
+    WSLog ws_log;
 
     //只打印字符串
     ws_log.info("只打印字符串");
