@@ -14,6 +14,12 @@
 #include <cmath>
 #include <mutex>
 
+#if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__) && !defined(__SCITECH_SNAP__)
+#define SPRINTF sprintf_s
+#else
+#define SPRINTF snprintf
+#endif
+
 using namespace std;
 
 namespace WsTools
