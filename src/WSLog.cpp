@@ -3,6 +3,10 @@
 
 namespace WsTools
 {
+    using std::random_device;
+    using std::unique_lock;
+    using std::defer_lock;
+
     string WSLog::_levelName[]  = { "DEBUG", "INFO", "NOTICE", "WARN", "ERR", "CRIT", "ALERT", "EMERG" };
 
     map<string, string> WSLog::escapes;

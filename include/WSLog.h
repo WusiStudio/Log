@@ -14,16 +14,26 @@
 #include <cmath>
 #include <mutex>
 
-#if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__) && !defined(__SCITECH_SNAP__)
-#define SPRINTF sprintf_s
-#else
-#define SPRINTF snprintf
-#endif
-
-using namespace std;
-
 namespace WsTools
 {
+    using std::string;
+    using std::regex;
+    using std::stringstream;
+    using std::sregex_iterator;
+    using std::uniform_int_distribution;
+    using std::pair;
+    using std::mutex;
+    using std::map;
+    using std::vector;
+    using std::cout;
+    using std::endl;
+
+    #if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__) && !defined(__SCITECH_SNAP__)
+    #define SPRINTF sprintf_s
+    #else
+    #define SPRINTF snprintf
+    #endif
+
     class WSLog
     {
     public:
