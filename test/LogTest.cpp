@@ -1,6 +1,6 @@
 #include <WSLog.h>
 
-using namespace WsTools;
+using WsTools::Log;
 
 int main(int argc, char ** argv)
 {
