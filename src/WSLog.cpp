@@ -264,7 +264,7 @@ namespace WsTools
         for(size_t i = 0; i < (sizeof(temp) - 1) / 2; ++i)
         {
             random_device rd;
-            uniform_int_distribution<int> dis(0x00, 0xFF);
+            std::uniform_int_distribution<int> dis(0x00, 0xFF);
             SPRINTF(temp + 2 * i, 2, "%02X", dis(rd));
         }
         return temp;

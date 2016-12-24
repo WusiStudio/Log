@@ -20,7 +20,6 @@ namespace WsTools
     using std::regex;
     using std::stringstream;
     using std::sregex_iterator;
-    using std::uniform_int_distribution;
     using std::pair;
     using std::mutex;
     using std::map;
